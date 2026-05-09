@@ -4,8 +4,8 @@ import type { CartItem } from "../../../types/product";
 import { logout } from "../../../utils/auth";
 import { getUSer } from "../../../utils/localStorage";
 
-// ─── AUTENTICACIÓN ──────────────────────────────────────────
-// Aceptamos tanto "client" como "admin"
+// autenticacion
+// aceptamos tanto client como admin
 const initPage = () => {
     const userJson = getUSer();
     if (!userJson) {
@@ -21,14 +21,14 @@ logoutButton?.addEventListener("click", () => {
     logout();
 });
 
-// ─── CONSTANTE DE CLAVE DEL CARRITO ────────────────────────
+//  CONSTANTE DE CLAVE DEL CARRITO 
 const CART_KEY = "foodstore_cart";
 
-// ─── ELEMENTOS DEL DOM ─────────────────────────────────────
+//  ELEMENTOS DEL DOM
 const cartItemsContainer = document.getElementById("cart-items") as HTMLDivElement;
 const cartSummaryContainer = document.getElementById("cart-summary") as HTMLDivElement;
 
-// ─── LEER Y GUARDAR CARRITO ────────────────────────────────
+// LEER Y GUARDAR CARRITO 
 function getCart(): CartItem[] {
     const raw = localStorage.getItem(CART_KEY);
     return raw ? JSON.parse(raw) : [];
@@ -38,7 +38,7 @@ function saveCart(cart: CartItem[]): void {
     localStorage.setItem(CART_KEY, JSON.stringify(cart));
 }
 
-// ─── EMOJI POR NOMBRE DE PRODUCTO ──────────────────────────
+//  EMOJI POR NOMBRE DE PRODUCTO
 function getEmoji(nombre: string): string {
     const lower = nombre.toLowerCase();
     if (lower.includes("pizza")) return "🍕";
@@ -53,7 +53,7 @@ function getEmoji(nombre: string): string {
     return "🍽️";
 }
 
-// ─── FORMATEAR PRECIO ──────────────────────────────────────
+// FORMATEAR PRECIO
 function formatPrice(value: number): string {
     return value.toLocaleString("es-AR", {
         style: "currency",
@@ -62,11 +62,17 @@ function formatPrice(value: number): string {
     });
 }
 
-// ─── ACTUALIZAR CANTIDAD ────────────────────────────────────
+// ACTUALIZAR CANTIDAD
 function updateQuantity(id: number, delta: number): void {
     let cart = getCart();
     const item = cart.find((i) => i.id === id);
     if (!item) return;
+
+    // limite si se pasa de stock
+    if (delta > 0 && item.cantidad >= item.stock) {
+        alert(`Solo hay ${item.stock} unidades disponibles.`);
+        return;
+    }
 
     item.cantidad += delta;
 
@@ -78,25 +84,25 @@ function updateQuantity(id: number, delta: number): void {
     renderCart();
 }
 
-// ─── ELIMINAR ÍTEM ──────────────────────────────────────────
+// ELIMINAR ÍTEM 
 function removeItem(id: number): void {
     const cart = getCart().filter((i) => i.id !== id);
     saveCart(cart);
     renderCart();
 }
 
-// ─── VACIAR CARRITO ─────────────────────────────────────────
+// VACIAR CARRITO
 function clearCart(): void {
     localStorage.removeItem(CART_KEY);
     renderCart();
 }
 
-// ─── CALCULAR TOTAL ─────────────────────────────────────────
+//  CALCULAR TOTAL 
 function calcTotal(cart: CartItem[]): number {
     return cart.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
 }
 
-// ─── HTML DE UN ÍTEM ───────────────────────────────────────
+//  HTML DE UN ÍTEM
 function createCartItemHTML(item: CartItem): string {
     const subtotal = item.precio * item.cantidad;
     return `
@@ -117,7 +123,7 @@ function createCartItemHTML(item: CartItem): string {
     `;
 }
 
-// ─── HTML DEL RESUMEN ───────────────────────────────────────
+// HTML DEL RESUMEN
 function createSummaryHTML(cart: CartItem[]): string {
     const total = calcTotal(cart);
     const cantidadItems = cart.reduce((acc, i) => acc + i.cantidad, 0);
@@ -136,7 +142,7 @@ function createSummaryHTML(cart: CartItem[]): string {
     `;
 }
 
-// ─── HTML DE CARRITO VACÍO ──────────────────────────────────
+// HTML DE CARRITO VACÍO 
 function createEmptyCartHTML(): string {
     return `
         <div class="empty-cart">
@@ -146,7 +152,7 @@ function createEmptyCartHTML(): string {
     `;
 }
 
-// ─── RENDER PRINCIPAL ───────────────────────────────────────
+// RENDER PRINCIPAL
 function renderCart(): void {
     const cart = getCart();
 
@@ -174,5 +180,4 @@ function renderCart(): void {
     document.getElementById("clear-btn")?.addEventListener("click", clearCart);
 }
 
-// ─── INICIALIZACIÓN ─────────────────────────────────────────
 renderCart();

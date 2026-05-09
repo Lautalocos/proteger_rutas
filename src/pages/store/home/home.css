@@ -16,7 +16,7 @@ body {
   color: var(--texto);
 }
 
-/* ─── HEADER ───────────────────────────────────────────────*/
+/*  HEADER */
 header {
   background: white;
   border-bottom: 1px solid var(--borde);
@@ -54,7 +54,7 @@ header {
 #cart-count { display: none; margin-left: 6px; font-weight: bold; }
 #cart-count.visible { display: inline; }
 
-/*  LAYOUT: SIDEBAR + CONTENIDO */
+/*  LAYOUT */
 .layout {
   display: flex;
   min-height: calc(100vh - 60px);

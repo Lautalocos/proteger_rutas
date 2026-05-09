@@ -8,7 +8,7 @@ import { getUSer } from "../../../utils/localStorage";
 const initPage = () => {
     const userJson = getUSer();
     if (!userJson) {
-        // Si no hay sesión → login
+        // Si no hay sesión ir a login
         window.location.href = "/src/pages/auth/login/login.html";
         return;
     }
@@ -21,17 +21,17 @@ logoutButton?.addEventListener("click", () => {
     logout();
 });
 
-// ─── CONSTANTE DE CLAVE DEL CARRITO ────────────────────────
+//  CONSTANTE DE CLAVE DEL CARRITO 
 const CART_KEY = "foodstore_cart";
 
-// ─── ELEMENTOS DEL DOM ─────────────────────────────────────
+//  ELEMENTOS DEL DOM 
 const grid = document.getElementById("products-grid") as HTMLDivElement;
 const searchInput = document.getElementById("search-input") as HTMLInputElement;
 const categoriesList = document.getElementById("categories-list") as HTMLDivElement;
 const cartCount = document.getElementById("cart-count") as HTMLSpanElement;
 const toast = document.getElementById("toast") as HTMLDivElement;
 
-// ─── ESTADO ────────────────────────────────────────────────
+//  ESTADO 
 let categoriaActiva: number | null = null;
 
 // emoticones para las categorrias
@@ -76,7 +76,11 @@ function addToCart(product: Product): void {
     const existing = cart.find((item) => item.id === product.id);
 
     if (existing) {
-        existing.cantidad += 1;
+    if (existing.cantidad >= product.stock) {
+        alert(`Solo hay ${product.stock} unidades disponibles.`);
+        return;
+    }
+    existing.cantidad += 1;
     } else {
         const newItem: CartItem = {
             id: product.id,
@@ -84,6 +88,7 @@ function addToCart(product: Product): void {
             precio: product.precio,
             cantidad: 1,
             imagen: product.imagen,
+            stock: product.stock,
         };
         cart.push(newItem);
     }
@@ -209,7 +214,6 @@ searchInput.addEventListener("input", () => {
     renderProducts(getFilteredProducts());
 });
 
-// INICIALIZACIÓN 
 renderCategories();
 renderProducts(PRODUCTS);
 updateCartCount();

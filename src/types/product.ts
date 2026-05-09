@@ -1,5 +1,6 @@
 import type { ICategory } from "./category";
 
+
 export interface Product {
     id: number;
     eliminado: boolean;
@@ -19,4 +20,5 @@ export interface CartItem {
     precio: number;
     cantidad: number;
     imagen: string;
+    stock: number;
     }
