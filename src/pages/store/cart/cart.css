@@ -1,0 +1,130 @@
+/* src/pages/store/cart/cart.css */
+
+/* ─── VARIABLES ────────────────────────────────────────────*/
+:root {
+    --fondo: #f5f5f5;
+    --acento: #ff6b2b;
+    --texto: #222;
+    --texto-suave: #888;
+    --borde: #ddd;
+    --peligro: #e74c3c;
+}
+
+/* ─── GENERAL ──────────────────────────────────────────────*/
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: system-ui, sans-serif;
+    background: var(--fondo);
+    color: var(--texto);
+}
+
+/* ─── HEADER ───────────────────────────────────────────────*/
+header {
+    background: white;
+    border-bottom: 1px solid var(--borde);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo { font-size: 1.4rem; font-weight: bold; color: var(--acento); }
+
+.back-btn { color: var(--texto-suave); text-decoration: none; font-size: 0.9rem; }
+.back-btn:hover { color: var(--texto); }
+
+/* ─── CONTENEDOR ───────────────────────────────────────────*/
+.container { max-width: 700px; margin: 2rem auto; padding: 0 1rem; }
+.container h1 { font-size: 1.6rem; margin-bottom: 1.5rem; }
+
+/* ─── ÍTEM DEL CARRITO ─────────────────────────────────────*/
+.cart-item {
+    background: white;
+    border: 1px solid var(--borde);
+    border-radius: 8px;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: 2.5rem 1fr auto auto auto;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.8rem;
+}
+
+.item-emoji { font-size: 1.8rem; text-align: center; }
+.item-name { font-weight: bold; font-size: 0.95rem; }
+.item-price { font-size: 0.8rem; color: var(--texto-suave); }
+
+/* ─── CONTROLES DE CANTIDAD ────────────────────────────────*/
+.qty-controls { display: flex; align-items: center; gap: 0.5rem; }
+
+.qty-btn {
+    background: var(--fondo);
+    border: 1px solid var(--borde);
+    border-radius: 4px;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.qty-btn:hover { background: var(--borde); }
+.qty-value { font-weight: bold; min-width: 20px; text-align: center; }
+.item-subtotal { font-weight: bold; color: var(--acento); min-width: 80px; text-align: right; }
+
+/* Botón eliminar */
+.remove-btn { background: none; border: none; cursor: pointer; font-size: 1rem; color: var(--texto-suave); }
+.remove-btn:hover { color: var(--peligro); }
+
+/* ─── RESUMEN ──────────────────────────────────────────────*/
+.cart-summary {
+    background: white;
+    border: 1px solid var(--borde);
+    border-radius: 8px;
+    padding: 1.2rem;
+    margin-top: 1.5rem;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    color: var(--texto-suave);
+    font-size: 0.9rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--borde);
+    margin-bottom: 0.8rem;
+}
+
+.summary-total { display: flex; justify-content: space-between; align-items: center; }
+.summary-total span:first-child { font-weight: bold; }
+.total-amount { font-weight: bold; font-size: 1.4rem; color: var(--acento); }
+
+/* Botón vaciar */
+.clear-btn {
+    display: block;
+    width: 100%;
+    margin-top: 1rem;
+    padding: 0.7rem;
+    background: none;
+    border: 1px solid var(--borde);
+    border-radius: 8px;
+    color: var(--texto-suave);
+    cursor: pointer;
+}
+
+.clear-btn:hover { border-color: var(--peligro); color: var(--peligro); }
+
+/* ─── CARRITO VACÍO ────────────────────────────────────────*/
+.empty-cart { text-align: center; padding: 4rem 2rem; color: var(--texto-suave); }
+.empty-cart p { font-size: 1.1rem; margin-bottom: 1.5rem; }
+
+.go-store-btn {
+    display: inline-block;
+    background: var(--acento);
+    color: white;
+    text-decoration: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 6px;
+}
+
+.go-store-btn:hover { opacity: 0.9; }

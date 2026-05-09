@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Food Store — Carrito</title>
+        <link rel="stylesheet" href="./cart.css" />
+    </head>
+    <body>
+
+        <header>
+            <div class="logo">Food<span>Store</span></div>
+            <div class="header-actions">
+                <a href="../home/home.html" class="back-btn">← Seguir comprando</a>
+                <button id="logoutButton" class="logout-btn">Cerrar sesión</button>
+            </div>
+        </header>
+
+        <div class="container">
+            <h1>🛒 Tu carrito</h1>
+
+            <!-- Acá TypeScript inyecta los ítems del carrito -->
+            <div id="cart-items"></div>
+
+            <!-- Acá TypeScript inyecta el resumen y el total -->
+            <div id="cart-summary"></div>
+        </div>
+
+        <script type="module" src="./cart.ts"></script>
+    </body>
+</html>
