@@ -1,16 +1,17 @@
 // src/pages/store/cart/cart.ts
 
 import type { CartItem } from "../../../types/product";
-import { checkAuhtUser, logout } from "../../../utils/auth";
+import { logout } from "../../../utils/auth";
+import { getUSer } from "../../../utils/localStorage";
 
 // ─── AUTENTICACIÓN ──────────────────────────────────────────
-// Si no hay sesión activa → redirige al login
+// Aceptamos tanto "client" como "admin"
 const initPage = () => {
-    checkAuhtUser(
-        "/src/pages/auth/login/login.html",  // sin sesión → login
-        "/src/pages/auth/login/login.html",  // rol incorrecto → login
-        "client"                             // rol requerido
-    );
+    const userJson = getUSer();
+    if (!userJson) {
+        window.location.href = "/src/pages/auth/login/login.html";
+        return;
+    }
 };
 initPage();
 

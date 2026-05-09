@@ -1,16 +1,13 @@
-/* src/pages/store/home/home.css */
 
-/* ─── VARIABLES DE COLOR ───────────────────────────────────
-   Cambiá estos valores para personalizar los colores */
 :root {
   --fondo: #f5f5f5;
   --acento: #ff6b2b;
   --texto: #222;
   --texto-suave: #888;
   --borde: #ddd;
+  --peligro: #e74c3c;
 }
 
-/* ─── GENERAL ──────────────────────────────────────────────*/
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
@@ -41,17 +38,29 @@ header {
   font-size: 0.9rem;
 }
 
-/* Contador de ítems — oculto hasta que haya productos */
+.logout-btn {
+    background: none;
+    border: none;
+    color: var(--texto-suave);
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.logout-btn:hover { color: var(--peligro); }
+
+
+/* Contador de itemss */
 #cart-count { display: none; margin-left: 6px; font-weight: bold; }
 #cart-count.visible { display: inline; }
 
-/* ─── LAYOUT: SIDEBAR + CONTENIDO ─────────────────────────*/
+/*  LAYOUT: SIDEBAR + CONTENIDO */
 .layout {
   display: flex;
   min-height: calc(100vh - 60px);
 }
 
-/* ─── SIDEBAR ──────────────────────────────────────────────*/
+/*  SIDEBAR */
 aside {
   width: 200px;
   background: white;
@@ -80,7 +89,7 @@ aside h2 { font-size: 0.85rem; color: var(--texto-suave); margin-bottom: 0.8rem;
 .category-btn:hover { background: var(--fondo); color: var(--texto); }
 .category-btn.active { background: var(--acento); color: white; }
 
-/* ─── CONTENIDO PRINCIPAL ──────────────────────────────────*/
+/*  CONTENIDO PRINCIPAL */
 main { flex: 1; padding: 2rem; }
 
 /* Input de búsqueda */
@@ -96,14 +105,14 @@ main { flex: 1; padding: 2rem; }
 
 #search-input:focus { border-color: var(--acento); }
 
-/* ─── GRILLA DE PRODUCTOS ──────────────────────────────────*/
+/*  GRILLA DE PRODUCTOS */
 .products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 1rem;
 }
 
-/* ─── TARJETA DE PRODUCTO ──────────────────────────────────*/
+/*  TARJETA DE PRODUCTO */
 .product-card {
   background: white;
   border: 1px solid var(--borde);
@@ -113,7 +122,7 @@ main { flex: 1; padding: 2rem; }
   flex-direction: column;
 }
 
-/* Área del emoji/imagen */
+/* area de emoticones */
 .card-img {
   height: 100px;
   background: var(--fondo);
@@ -129,7 +138,7 @@ main { flex: 1; padding: 2rem; }
 .card-name { font-weight: bold; margin: 0.2rem 0; }
 .card-desc { font-size: 0.8rem; color: var(--texto-suave); }
 
-/* Pie de la card */
+/* Pie de pagina */
 .card-footer {
   padding: 0.8rem;
   border-top: 1px solid var(--borde);
@@ -140,7 +149,7 @@ main { flex: 1; padding: 2rem; }
 
 .card-price { font-weight: bold; color: var(--acento); }
 
-/* Botón agregar */
+/* Boton agregar */
 .add-btn {
   background: var(--acento);
   color: white;
@@ -157,7 +166,7 @@ main { flex: 1; padding: 2rem; }
   cursor: not-allowed;
 }
 
-/* ─── SIN RESULTADOS ───────────────────────────────────────*/
+/* cunado buscador no encuentra resultados*/
 .empty-state {
   grid-column: 1 / -1;
   text-align: center;
@@ -165,8 +174,7 @@ main { flex: 1; padding: 2rem; }
   color: var(--texto-suave);
 }
 
-/* ─── TOAST (NOTIFICACIÓN AL AGREGAR) ──────────────────────
-   Invisible por defecto. TypeScript agrega la clase "show" */
+/* NOTIFICACIÓN AL AGREGAR */
 #toast {
   position: fixed;
   bottom: 1.5rem;
@@ -182,7 +190,13 @@ main { flex: 1; padding: 2rem; }
 
 #toast.show { opacity: 1; }
 
-/* ─── FOOTER ───────────────────────────────────────────────*/
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+/*  FOOTER */
 footer {
   margin-top: 3rem;
   padding-top: 1rem;
@@ -193,3 +207,4 @@ footer {
 
 footer a { color: var(--acento); text-decoration: none; }
 footer a:hover { text-decoration: underline; }
+

@@ -1,19 +1,17 @@
-// src/pages/store/home/home.ts
-
 import { PRODUCTS, getCategories } from "../../../data/data";
 import type { Product } from "../../../types/product";
 import type { CartItem } from "../../../types/product";
-import { checkAuhtUser, logout } from "../../../utils/auth";
+import { logout } from "../../../utils/auth";
+import { getUSer } from "../../../utils/localStorage";
 
-// ─── AUTENTICACIÓN ──────────────────────────────────────────
-// Si no hay sesión activa → redirige al login
-// Esta función se ejecuta antes que cualquier otra cosa
+// Verificamos manualmente que haya una sesión activa.
 const initPage = () => {
-    checkAuhtUser(
-        "/src/pages/auth/login/login.html",  // sin sesión → login
-        "/src/pages/auth/login/login.html",  // rol incorrecto → login
-        "client"                             // rol requerido
-    );
+    const userJson = getUSer();
+    if (!userJson) {
+        // Si no hay sesión → login
+        window.location.href = "/src/pages/auth/login/login.html";
+        return;
+    }
 };
 initPage();
 
@@ -36,7 +34,7 @@ const toast = document.getElementById("toast") as HTMLDivElement;
 // ─── ESTADO ────────────────────────────────────────────────
 let categoriaActiva: number | null = null;
 
-// ─── EMOJI POR CATEGORÍA ───────────────────────────────────
+// emoticones para las categorrias
 function getEmoji(nombreCategoria: string): string {
     const emojis: Record<string, string> = {
         Pizzas: "🍕",
@@ -49,18 +47,18 @@ function getEmoji(nombreCategoria: string): string {
     return emojis[nombreCategoria] ?? "🍽️";
 }
 
-// ─── LEER CARRITO ──────────────────────────────────────────
+//LEER CARRITO
 function getCart(): CartItem[] {
     const raw = localStorage.getItem(CART_KEY);
     return raw ? JSON.parse(raw) : [];
 }
 
-// ─── GUARDAR CARRITO ───────────────────────────────────────
+//GUARDAR CARRITO
 function saveCart(cart: CartItem[]): void {
     localStorage.setItem(CART_KEY, JSON.stringify(cart));
 }
 
-// ─── ACTUALIZAR CONTADOR DEL HEADER ────────────────────────
+//ACTUALIZAR CONTADOR DEL HEADER
 function updateCartCount(): void {
     const cart = getCart();
     const total = cart.reduce((acc, item) => acc + item.cantidad, 0);
@@ -72,7 +70,7 @@ function updateCartCount(): void {
     }
 }
 
-// ─── AGREGAR AL CARRITO ────────────────────────────────────
+//AGREGAR AL CARRITO
 function addToCart(product: Product): void {
     const cart = getCart();
     const existing = cart.find((item) => item.id === product.id);
@@ -95,13 +93,13 @@ function addToCart(product: Product): void {
     showToast();
 }
 
-// ─── MOSTRAR TOAST ─────────────────────────────────────────
+// MOSTRAR TOAST
 function showToast(): void {
     toast.classList.add("show");
     setTimeout(() => toast.classList.remove("show"), 2000);
 }
 
-// ─── CREAR TARJETA DE PRODUCTO ─────────────────────────────
+//TARJETA DE PRODUCTO
 function createProductCard(product: Product): string {
     const categoria = product.categorias[0]?.nombre ?? "";
     const emoji = getEmoji(categoria);
@@ -132,7 +130,7 @@ function createProductCard(product: Product): string {
     `;
 }
 
-// ─── RENDERIZAR PRODUCTOS ──────────────────────────────────
+// PRODUCTOS
 function renderProducts(products: Product[]): void {
     if (products.length === 0) {
         grid.innerHTML = `
@@ -142,6 +140,7 @@ function renderProducts(products: Product[]): void {
         `;
         return;
     }
+
 
     grid.innerHTML = products.map(createProductCard).join("");
 
@@ -154,7 +153,7 @@ function renderProducts(products: Product[]): void {
     });
 }
 
-// ─── OBTENER PRODUCTOS FILTRADOS ───────────────────────────
+// OBTENER PRODUCTOS FILTRADOS
 function getFilteredProducts(): Product[] {
     const searchText = searchInput.value.toLowerCase().trim();
 
@@ -171,7 +170,7 @@ function getFilteredProducts(): Product[] {
     });
 }
 
-// ─── RENDERIZAR CATEGORÍAS ─────────────────────────────────
+// CATEGORÍAS
 function renderCategories(): void {
     const categories = getCategories();
 
@@ -198,7 +197,6 @@ function renderCategories(): void {
     });
 }
 
-// ─── MARCAR CATEGORÍA ACTIVA ───────────────────────────────
 function setActiveCategory(activeBtn: HTMLButtonElement): void {
     categoriesList
         .querySelectorAll<HTMLButtonElement>(".category-btn")
@@ -206,12 +204,12 @@ function setActiveCategory(activeBtn: HTMLButtonElement): void {
     activeBtn.classList.add("active");
 }
 
-// ─── EVENTO: BÚSQUEDA EN TIEMPO REAL ───────────────────────
+// BUSQUEDA EN TIEMPO REAL
 searchInput.addEventListener("input", () => {
     renderProducts(getFilteredProducts());
 });
 
-// ─── INICIALIZACIÓN ────────────────────────────────────────
+// INICIALIZACIÓN 
 renderCategories();
 renderProducts(PRODUCTS);
 updateCartCount();

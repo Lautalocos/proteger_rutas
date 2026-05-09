@@ -15,5 +15,7 @@ const initPage = () => {
     "/src/pages/client/home/home.html",
     "admin"
   );
+  // Redirigimos al store automáticamente
+    window.location.href = "/src/pages/store/home/home.html";
 };
 initPage();

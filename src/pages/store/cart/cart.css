@@ -1,6 +1,4 @@
-/* src/pages/store/cart/cart.css */
 
-/* ─── VARIABLES ────────────────────────────────────────────*/
 :root {
     --fondo: #f5f5f5;
     --acento: #ff6b2b;
@@ -10,7 +8,7 @@
     --peligro: #e74c3c;
 }
 
-/* ─── GENERAL ──────────────────────────────────────────────*/
+/*  GENERAL */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
@@ -19,7 +17,13 @@ body {
     color: var(--texto);
 }
 
-/* ─── HEADER ───────────────────────────────────────────────*/
+/* HEADER */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
 header {
     background: white;
     border-bottom: 1px solid var(--borde);
@@ -34,11 +38,22 @@ header {
 .back-btn { color: var(--texto-suave); text-decoration: none; font-size: 0.9rem; }
 .back-btn:hover { color: var(--texto); }
 
-/* ─── CONTENEDOR ───────────────────────────────────────────*/
+.logout-btn {
+    background: none;
+    border: none;
+    color: var(--texto-suave);
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.logout-btn:hover { color: var(--peligro); }
+
+/* CONTENEDOR */
 .container { max-width: 700px; margin: 2rem auto; padding: 0 1rem; }
 .container h1 { font-size: 1.6rem; margin-bottom: 1.5rem; }
 
-/* ─── ÍTEM DEL CARRITO ─────────────────────────────────────*/
+/* item de carrito*/
 .cart-item {
     background: white;
     border: 1px solid var(--borde);
@@ -55,7 +70,7 @@ header {
 .item-name { font-weight: bold; font-size: 0.95rem; }
 .item-price { font-size: 0.8rem; color: var(--texto-suave); }
 
-/* ─── CONTROLES DE CANTIDAD ────────────────────────────────*/
+
 .qty-controls { display: flex; align-items: center; gap: 0.5rem; }
 
 .qty-btn {
@@ -76,7 +91,7 @@ header {
 .remove-btn { background: none; border: none; cursor: pointer; font-size: 1rem; color: var(--texto-suave); }
 .remove-btn:hover { color: var(--peligro); }
 
-/* ─── RESUMEN ──────────────────────────────────────────────*/
+/* RESUMEN */
 .cart-summary {
     background: white;
     border: 1px solid var(--borde);
@@ -114,7 +129,6 @@ header {
 
 .clear-btn:hover { border-color: var(--peligro); color: var(--peligro); }
 
-/* ─── CARRITO VACÍO ────────────────────────────────────────*/
 .empty-cart { text-align: center; padding: 4rem 2rem; color: var(--texto-suave); }
 .empty-cart p { font-size: 1.1rem; margin-bottom: 1.5rem; }
 

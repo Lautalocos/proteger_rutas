@@ -1,39 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login de Food Store</title>
+    <link rel="stylesheet" href="./login.css" />
 </head>
-
 <body>
-    <h1> Login</h1>
+    <h1>Food Store</h1>
 
-    <form id="form">
-
+    <form id="formularioLogin">
+        <h1>Iniciar Sesión</h1>
         <div>
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" autocomplete="off" placeholder="example@example.com">
+            <label for="inputEmail">Email</label>
+            <input type="email" id="inputEmail" name="email" autocomplete="off" placeholder="ejemplo@correo.com" required>
         </div>
         <div>
-            <label for="password">password</label>
-            <input type="password" id="password" name="password" autocomplete="off" placeholder="********">
+            <label for="inputPassword">Contraseña</label>
+            <input type="password" id="inputPassword" name="password" autocomplete="off" placeholder="********" required>
         </div>
-        <div>
-            <label for="rol">Rol</label>
-            <select name="rol" id="rol">
-                <option value="">Seleccione un rol</option>
-                <option value="client">Cliente</option>
-                <option value="admin">Admin</option>
-            </select>
-        </div>
+        
 
         <button type="submit">Ingresar</button>
-
+        <button type="button" id="botonRegistro">Registrarse</button>
     </form>
 
     <script type="module" src="./login.ts"></script>
 </body>
-
 </html>

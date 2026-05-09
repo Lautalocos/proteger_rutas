@@ -8,8 +8,8 @@ buttonLogout?.addEventListener("click", () => {
 });
 
 const initPage = () => {
-    // Si no hay sesión → login. Si es admin → admin/home.
-    // Si es client → redirige al store
+    // Si no hay sesión, va a login. Si es admin va a admin/home.
+    // Si es client, redirige al store
     checkAuhtUser(
         "/src/pages/auth/login/login.html",
         "/src/pages/admin/home/home.html",
