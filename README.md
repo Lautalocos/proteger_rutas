@@ -2,6 +2,8 @@
 
 Aplicación frontend de una tienda de comida. Desarrollada con Vite y TypeScript
 
+link a presentacion: https://youtu.be/ILghnyXYmRc
+
 ## Alumno
 
 Laner, Lautaro — Tecnicatura Universitaria en Programación — UTN
